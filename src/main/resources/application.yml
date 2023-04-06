@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    #url: jdbc:h2:mem:test_db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    #url: jdbc:mysql://localhost:3306/user_db
+    url: jdbc:postgresql://localhost:5432/licenseServer
+    username: postgres
+    password: new_password
+  tomcat:
+    max-wait: 20000
+    max-active: 50
+    max-idle: 20
+    min-idle: 15
+  jpa:
+    hibernate:
+      ddl-auto: create-drop # When you launch the application for the first time - switch "none" at "create"
+    show-sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+    generate-ddl: true
+server:
+  port: 8080
+
+security:
+  jwt:
+    token:
+      secret-key: secret-key
+      expire-length: 300000 # 5 minutes duration by default: 5 minutes * 60 seconds * 1000 miliseconds
+      jwtRefreshExpirationMs: 120000
+
+UserController:
+  login: Authenticates user and returns its JWT access and refresh token.
+  register: Creates user and returns its JWT access and refresh token
+  delete: Deletes specific user
+  search: Returns specific user by username
+  me: Returns current user's data
